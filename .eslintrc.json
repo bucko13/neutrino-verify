@@ -1,0 +1,33 @@
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:react/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["prettier", "react"],
+  "rules": {
+    "prettier/prettier": "error",
+    "no-empty": ["error", { "allowEmptyCatch": true }],
+    "no-param-reassign": "warn"
+  },
+  "overrides": {
+    "files": ["src/tests/**/*.js"],
+    "env": {
+      "mocha": true
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "^16.3.0"
+    }
+  }
+}
