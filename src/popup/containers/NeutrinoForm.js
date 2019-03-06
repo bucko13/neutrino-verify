@@ -21,11 +21,10 @@ export default class NeutrinoForm extends React.PureComponent {
 
   handleSubmit() {
     const filter = BlockFilter.fromHex(this.state.filter);
-    filter.addKey(this.state.blockHash);
+    filter.deriveKey(this.state.blockHash);
     const tx = TX.fromRaw(this.state.tx, 'hex');
     console.log('tx:', tx);
-    console.log('filter:', filter);
-    this.setState({ filter: '', tx: '', blockHash: '' });
+    // this.setState({ filter: '', tx: '', blockHash: '' });
   }
 
   render() {
