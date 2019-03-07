@@ -16,6 +16,7 @@ export default class NeutrinoForm extends React.PureComponent {
   }
 
   handleChange(e, { name, value }) {
+    this.setState({ valid: undefined });
     this.setState({ [name]: value });
   }
 
@@ -23,8 +24,15 @@ export default class NeutrinoForm extends React.PureComponent {
     const filter = BlockFilter.fromHex(this.state.filter);
     filter.deriveKey(this.state.blockHash);
     const tx = TX.fromRaw(this.state.tx, 'hex');
-    console.log('tx:', tx);
-    // this.setState({ filter: '', tx: '', blockHash: '' });
+    const scripts = tx.outputs
+      .filter(
+        output => output.script.length !== 0 && output.script.raw[0] !== 106
+      )
+      .map(output => output.script.raw);
+
+    const valid = scripts.every(script => filter.match(script));
+    if (valid) alert(`Tx was found in the block!`);
+    else alert(`Tx was not found in the block`);
   }
 
   render() {
